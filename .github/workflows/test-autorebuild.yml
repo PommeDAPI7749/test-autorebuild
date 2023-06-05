@@ -20,6 +20,6 @@ jobs:
           pass: ${{ secrets.PASSWORD }}
           run: | 
             cd /var/www/test-autorebuild/ 
-            git checkout main 
-            git pull 
-            systemctl reload apache2
+            sudo git checkout main 
+            sudo git pull 
+            sudo systemctl reload apache2
