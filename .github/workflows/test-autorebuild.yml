@@ -19,7 +19,10 @@ jobs:
           user: ${{ secrets.USERNAME }}
           pass: ${{ secrets.PASSWORD }}
           run: | 
+            sudo su | echo "$PASSWORD"
             cd /var/www/test-autorebuild/ 
             sudo git checkout main 
             sudo git pull 
             sudo systemctl reload apache2
+        env:
+          REPOSITORY_VAR: ${{ secrets.PASSWORD }}
