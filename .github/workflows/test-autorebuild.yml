@@ -1,15 +1,22 @@
 name: test-autorebuild
-on: [push]
+on: 
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
 jobs:
-  check-bats-version:
+  dl-new-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install sshpass
-        run: apt install sshpass
       - name: connect to VPS
-        run: sshpass -p $PASSWORD ssh mayeul@$IP_ADDRESS -p $PORT
-        env:
-          PASSWORD: ${{ env.PASSWORD }}
-          IP_ADDRESS: ${{ env.IP_ADDRESS }}
-          PORT: ${{ env.PORT }}
+        uses: matheusvanzan/sshpass-action@v2
+        with:
+          host: ${{ secrets.IP_ADDRESS }}
+          port: ${{ secrets.PORT }}
+          user: ${{ secrets.USERNAME }}
+          pass: ${{ secrets.PASSWORD }}
+          run: |
+            cat "test"
