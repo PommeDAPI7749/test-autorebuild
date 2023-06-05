@@ -19,7 +19,7 @@ jobs:
           user: ${{ secrets.USERNAME }}
           pass: ${{ secrets.PASSWORD }}
           run: | 
-            cd /var/www/test-autobuild/ 
+            cd /var/www/test-autorebuild/ 
             git checkout main 
             git pull 
             systemctl reload apache2
